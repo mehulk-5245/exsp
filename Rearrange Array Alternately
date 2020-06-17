@@ -1,0 +1,10 @@
+for i in range(int(input())):
+    d=[]
+    xs=int(input()) 
+    arr = list(input().split())
+    for k in range(xs-1 ,xs//2-1,-1):
+        d.append((arr[k]))
+        if((arr[xs-k-1])!=(arr[k])):
+            d.append((arr[xs-k-1]))
+          
+    print(*d)
