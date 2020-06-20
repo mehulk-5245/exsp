@@ -1,0 +1,7 @@
+n=int(input())
+w=list(map(int,input().split()))
+w.sort()
+c=[]
+for j in range(n-1):
+    c.append(abs(w[j]-w[j+1]))
+print(min(c))
