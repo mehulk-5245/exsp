@@ -13,7 +13,7 @@ jobs:
             **/*.py
       - uses: andrewnester/autoreview@master
         with:
-          apiKey: ${{ secrets.OpenAIKey }}
+          apiKey: ${{ secrets.OPENAI_API_KEY }}
           files: env.GIT_DIFF
       - uses: mshick/add-pr-comment@v2
         with:
