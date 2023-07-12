@@ -1,3 +1,4 @@
+#suggest me some better approach if possible
 def fibonacci(n):
     if n <= 1:
         return n
