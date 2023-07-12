@@ -1,21 +1,30 @@
-name: Auto Review
-on: pull_request
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    permissions:
-        pull-requests: write
-    steps:    
-      - uses: actions/checkout@master
-      - uses: technote-space/get-diff-action@v6
-        with:
-          PATTERNS: |
-            **/*.py
-      - uses: andrewnester/autoreview@master
-        with:
-          apiKey: ${{ secrets.OPENAI_API_KEY }}
-          files: env.GIT_DIFF
-      - uses: mshick/add-pr-comment@v2
-        with:
-          message: ${{ steps.selftest.outputs.review_comment }}
+name: Code Review
 
+permissions:
+  contents: read
+  pull-requests: write
+
+on:
+  pull_request:
+  pull_request_review_comment:
+    types: [created]
+
+concurrency:
+  group:
+    ${{ github.repository }}-${{ github.event.number || github.head_ref ||
+    github.sha }}-${{ github.workflow }}-${{ github.event_name ==
+    'pull_request_review_comment' && 'pr_comment' || 'pr' }}
+  cancel-in-progress: ${{ github.event_name != 'pull_request_review_comment' }}
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: fluxninja/openai-pr-reviewer@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        with:
+          debug: false
+          review_simple_changes: false
+          review_comment_lgtm: false
