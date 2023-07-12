@@ -1,10 +1,11 @@
-#suggest me some better approach if possible
-def fibonacci(n):
-    if n <= 1:
-        return n
-    else:
-        return fibonacci(n-1) + fibonacci(n-2)
+from flask import Flask, request
 
-n = 10
-result = fibonacci(n)
-print("Fibonacci number at position", n, ":", result)
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    name = request.args.get('name')
+    return '<h1>Hello, ' + name + '!</h1>'
+
+if __name__ == '__main__':
+    app.run()
