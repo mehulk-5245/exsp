@@ -1,9 +1,9 @@
-def sum_list(numbers):
-    result = 0
-    for num in numbers:
-        result += num
-    return result
+def fibonacci(n):
+    if n <= 1:
+        return n
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
 
-numbers = [1, 2, 3, 4, 5]
-result = sum_list(numbers)
-print("Sum:", result)
+n = 10
+result = fibonacci(n)
+print("Fibonacci number at position", n, ":", result)
