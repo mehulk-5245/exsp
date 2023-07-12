@@ -1,6 +1,9 @@
-a = 2
-b = 3
-sum = a + b
-d = 41
-output = sum + d
-print(output)
+def sum_list(numbers):
+    result = 0
+    for num in numbers:
+        result += num
+    return result
+
+numbers = [1, 2, 3, 4, 5]
+result = sum_list(numbers)
+print("Sum:", result)
