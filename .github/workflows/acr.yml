@@ -6,7 +6,6 @@ permissions:
 
 on:
   pull_request:
-    types: [open, reopen]
   pull_request_review_comment:
     types: [created]
 
